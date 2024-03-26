@@ -19,6 +19,7 @@ use crate::{
     wire_representation::Position,
 };
 
+use super::core::Cell;
 use super::core::CellBoard as CCB;
 use super::core::CellIndex;
 use super::core::{simulate_with_moves, EvaluateMode};
@@ -52,6 +53,11 @@ pub type CellBoard16Snakes50x50 = CellBoard<u16, Custom, { 50 * 50 }, 16>;
 impl<T: CN, D: Dimensions, const BOARD_SIZE: usize, const MAX_SNAKES: usize>
     CellBoard<T, D, BOARD_SIZE, MAX_SNAKES>
 {
+    /// Raw cells.
+    pub fn cells(&self) -> &[Cell<T>; BOARD_SIZE] {
+        self.embedded.cells()
+    }
+
     /// Builds a cellboard from a given game, will return an error if the game doesn't match
     /// the provided BOARD_SIZE or MAX_SNAKES. You are encouraged to use `CellBoard4Snakes11x11`
     /// for the common game layout

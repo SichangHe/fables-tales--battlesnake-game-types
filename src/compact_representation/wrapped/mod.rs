@@ -19,6 +19,7 @@ use crate::{
     wire_representation::Position,
 };
 
+use super::core::Cell;
 use super::core::{simulate_with_moves, EvaluateMode};
 use super::core::{CellBoard as CCB, CellIndex};
 use super::dimensions::{ArcadeMaze, Custom, Dimensions, Fixed, Square};
@@ -36,6 +37,11 @@ impl_common_board_traits!(CellBoard);
 impl<T: CN, D: Dimensions, const BOARD_SIZE: usize, const MAX_SNAKES: usize>
     CellBoard<T, D, BOARD_SIZE, MAX_SNAKES>
 {
+    /// Raw cells.
+    pub fn cells(&self) -> &[Cell<T>; BOARD_SIZE] {
+        self.embedded.cells()
+    }
+
     /// Asserts that the board is consistent (e.g. no snake holes)
     pub fn assert_consistency(&self) -> bool {
         self.embedded.assert_consistency()

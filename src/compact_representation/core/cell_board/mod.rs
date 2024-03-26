@@ -67,6 +67,10 @@ fn get_snake_id(
 impl<T: CN, D: Dimensions, const BOARD_SIZE: usize, const MAX_SNAKES: usize>
     CellBoard<T, D, BOARD_SIZE, MAX_SNAKES>
 {
+    pub fn cells(&self) -> &[Cell<T>; BOARD_SIZE] {
+        &self.cells
+    }
+
     pub fn iter_healths(&self) -> Iter<'_, u8> {
         self.healths.iter()
     }
